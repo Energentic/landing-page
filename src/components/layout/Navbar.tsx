@@ -1,20 +1,36 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/#about" },
-  { name: "Features", href: "/#features" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/#contact" },
+  { name: "Home", href: "/", section: null },
+  { name: "About", href: "/#about", section: "about" },
+  { name: "Features", href: "/#features", section: "features" },
+  { name: "Blog", href: "/blog", section: null },
+  { name: "Contact", href: "/#contact", section: "contact" },
 ];
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleNavClick = (e: React.MouseEvent, link: typeof navLinks[0]) => {
+    if (link.section) {
+      e.preventDefault();
+      if (location.pathname !== "/") {
+        navigate("/");
+        setTimeout(() => {
+          document.getElementById(link.section!)?.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      } else {
+        document.getElementById(link.section)?.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50">
@@ -22,9 +38,7 @@ export const Navbar = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-lg bg-foreground flex items-center justify-center transition-transform group-hover:scale-105">
-              <Zap className="w-5 h-5 text-background" />
-            </div>
+            <img src={logo} alt="Energentic AI" className="w-9 h-9 transition-transform group-hover:scale-105" />
             <span className="text-lg font-bold text-foreground tracking-tight">
               ENERGENTIC AI
             </span>
@@ -36,6 +50,7 @@ export const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.href}
+                onClick={(e) => handleNavClick(e, link)}
                 className={cn(
                   "text-sm font-medium transition-colors link-underline",
                   location.pathname === link.href
@@ -73,7 +88,10 @@ export const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.href}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => {
+                    handleNavClick(e, link);
+                    setIsOpen(false);
+                  }}
                   className={cn(
                     "text-base font-medium py-2 transition-colors",
                     location.pathname === link.href
