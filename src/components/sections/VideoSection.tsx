@@ -1,6 +1,3 @@
-import { Play } from "lucide-react";
-import { Button } from "@/components/ui/button";
-
 export const VideoSection = () => {
   return (
     <section id="video" className="py-20 md:py-32 bg-energy-light">
@@ -25,39 +22,13 @@ export const VideoSection = () => {
         {/* Video Player */}
         <div className="relative max-w-4xl mx-auto">
           <div className="relative aspect-video rounded-2xl overflow-hidden bg-foreground shadow-prominent">
-            {/* Video Thumbnail/Placeholder */}
-            <div className="absolute inset-0 bg-gradient-to-br from-foreground to-foreground/80 flex items-center justify-center">
-              {/* Grid Pattern */}
-              <div className="absolute inset-0 opacity-10">
-                <div
-                  className="w-full h-full"
-                  style={{
-                    backgroundImage: `linear-gradient(hsl(var(--background) / 0.3) 1px, transparent 1px),
-                                      linear-gradient(90deg, hsl(var(--background) / 0.3) 1px, transparent 1px)`,
-                    backgroundSize: "40px 40px",
-                  }}
-                />
-              </div>
-
-              {/* Central Content */}
-              <div className="relative z-10 text-center">
-                <div className="w-24 h-24 rounded-full bg-primary/90 flex items-center justify-center mx-auto mb-6 cursor-pointer hover:bg-primary transition-colors hover:scale-110 duration-300 shadow-glow">
-                  <Play className="w-10 h-10 text-primary-foreground ml-1" />
-                </div>
-                <p className="text-background/80 text-lg font-medium">
-                  Watch the Demo
-                </p>
-                <p className="text-background/50 text-sm mt-1">2 minutes</p>
-              </div>
-
-              {/* Corner Decorations */}
-              <div className="absolute top-6 left-6 text-background/30 text-xs font-mono">
-                ENERGENTIC.AI
-              </div>
-              <div className="absolute bottom-6 right-6 text-background/30 text-xs font-mono">
-                DEMO 2024
-              </div>
-            </div>
+            <iframe
+              src="https://www.youtube.com/embed/sF_omtHyLx8"
+              title="Energentic AI Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
           </div>
 
           {/* Floating Stats */}

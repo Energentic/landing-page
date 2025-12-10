@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Zap, Linkedin, Twitter, Mail } from "lucide-react";
+import { Linkedin, Twitter, Mail } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const footerLinks = {
   product: [
@@ -35,9 +36,7 @@ export const Footer = () => {
           {/* Brand */}
           <div className="col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-lg bg-background flex items-center justify-center">
-                <Zap className="w-5 h-5 text-foreground" />
-              </div>
+              <img src={logo} alt="Energentic AI" className="w-9 h-9 invert" />
               <span className="text-lg font-bold tracking-tight">
                 ENERGENTIC AI
               </span>
