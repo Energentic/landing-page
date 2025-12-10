@@ -21,13 +21,14 @@ export const VideoSection = () => {
 
         {/* Video Player */}
         <div className="relative max-w-4xl mx-auto">
-          <div className="relative aspect-video rounded-2xl overflow-hidden bg-foreground shadow-prominent">
+          <div className="relative aspect-video rounded-2xl overflow-hidden shadow-prominent">
             <iframe
-              src="https://www.youtube.com/embed/sF_omtHyLx8"
+              src="https://www.youtube.com/embed/sF_omtHyLx8?rel=0&modestbranding=1"
               title="Energentic AI Demo"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              className="absolute inset-0 w-full h-full"
+              frameBorder="0"
+              className="absolute inset-0 w-full h-full border-0"
             />
           </div>
 
