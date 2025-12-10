@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Zap, Play, BarChart3, Activity, Cpu, LineChart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { WaitlistDialog } from "@/components/WaitlistDialog";
+import logo from "@/assets/logo.png";
 
 export const HeroSection = () => {
   return (
@@ -53,8 +54,8 @@ export const HeroSection = () => {
             {/* Dashboard Header */}
             <div className="flex items-center gap-4 px-6 py-4 border-b border-border bg-muted/30">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-foreground flex items-center justify-center">
-                  <Zap className="w-4 h-4 text-background" />
+                <div className="w-8 h-8 rounded-lg overflow-hidden">
+                  <img src={logo} alt="Energentic" className="w-full h-full object-contain" />
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-foreground">Energentic</p>
