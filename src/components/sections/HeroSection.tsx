@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Zap, Play, BarChart3, Activity, Cpu, LineChart } from "lucide-react";
 import { Link } from "react-router-dom";
+import { WaitlistDialog } from "@/components/WaitlistDialog";
 
 export const HeroSection = () => {
   return (
@@ -31,12 +32,12 @@ export const HeroSection = () => {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-up animation-delay-300">
-            <Button variant="hero" size="xl" asChild>
-              <Link to="/#contact" className="gap-2">
+            <WaitlistDialog>
+              <Button variant="hero" size="xl" className="gap-2">
                 <Zap className="w-5 h-5" />
-                Book a Demo
-              </Link>
-            </Button>
+                Join Waitlist
+              </Button>
+            </WaitlistDialog>
             <Button variant="hero-outline" size="xl" asChild>
               <Link to="/#video" className="gap-2">
                 <Play className="w-5 h-5" />
