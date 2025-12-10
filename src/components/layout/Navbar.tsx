@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
+import { WaitlistDialog } from "@/components/WaitlistDialog";
 
 const navLinks = [
   { name: "Home", href: "/", section: null },
   { name: "About", href: "/#about", section: "about" },
   { name: "Features", href: "/#features", section: "features" },
+  { name: "Team", href: "/#team", section: "team" },
   { name: "Blog", href: "/blog", section: null },
   { name: "Contact", href: "/#contact", section: "contact" },
 ];
@@ -65,9 +67,11 @@ export const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="hero" size="lg" asChild>
-              <Link to="/#contact">Book a Demo</Link>
-            </Button>
+            <WaitlistDialog>
+              <Button variant="hero" size="lg">
+                Join Waitlist
+              </Button>
+            </WaitlistDialog>
           </div>
 
           {/* Mobile Menu Button */}
@@ -102,11 +106,11 @@ export const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-              <Button variant="hero" size="lg" className="mt-2" asChild>
-                <Link to="/#contact" onClick={() => setIsOpen(false)}>
-                  Book a Demo
-                </Link>
-              </Button>
+              <WaitlistDialog>
+                <Button variant="hero" size="lg" className="mt-2">
+                  Join Waitlist
+                </Button>
+              </WaitlistDialog>
             </div>
           </div>
         )}
