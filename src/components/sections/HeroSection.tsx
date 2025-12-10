@@ -3,7 +3,35 @@ import { Zap, Play, BarChart3, Activity, Cpu, LineChart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { WaitlistDialog } from "@/components/WaitlistDialog";
 import logo from "@/assets/logo.png";
+import { LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
+// Realistic 24-hour UK energy data with typical patterns
+const forecastData = [
+  { hour: '00h', load: 28.5, pv: 0, price: 8.2 },
+  { hour: '01h', load: 26.8, pv: 0, price: 7.8 },
+  { hour: '02h', load: 25.2, pv: 0, price: 7.5 },
+  { hour: '03h', load: 24.1, pv: 0, price: 7.2 },
+  { hour: '04h', load: 23.8, pv: 0, price: 7.1 },
+  { hour: '05h', load: 25.4, pv: 0, price: 7.4 },
+  { hour: '06h', load: 32.1, pv: 0.8, price: 12.5 },
+  { hour: '07h', load: 41.2, pv: 2.1, price: 18.3 },
+  { hour: '08h', load: 48.6, pv: 4.2, price: 24.7 },
+  { hour: '09h', load: 45.3, pv: 8.5, price: 21.4 },
+  { hour: '10h', load: 42.1, pv: 12.6, price: 18.9 },
+  { hour: '11h', load: 39.8, pv: 16.2, price: 16.2 },
+  { hour: '12h', load: 38.2, pv: 18.5, price: 14.8 },
+  { hour: '13h', load: 37.9, pv: 19.1, price: 14.5 },
+  { hour: '14h', load: 38.8, pv: 17.8, price: 15.1 },
+  { hour: '15h', load: 40.2, pv: 15.4, price: 16.8 },
+  { hour: '16h', load: 43.1, pv: 11.2, price: 19.5 },
+  { hour: '17h', load: 47.8, pv: 6.8, price: 26.4 },
+  { hour: '18h', load: 52.3, pv: 2.1, price: 32.8 },
+  { hour: '19h', load: 54.7, pv: 0.3, price: 35.2 },
+  { hour: '20h', load: 51.2, pv: 0, price: 31.6 },
+  { hour: '21h', load: 46.8, pv: 0, price: 28.1 },
+  { hour: '22h', load: 39.4, pv: 0, price: 22.3 },
+  { hour: '23h', load: 33.1, pv: 0, price: 15.7 },
+];
 export const HeroSection = () => {
   return (
     <section className="relative min-h-screen pt-20 md:pt-24 overflow-hidden bg-gradient-hero">
@@ -135,33 +163,73 @@ export const HeroSection = () => {
                     </span>
                   </div>
                   
-                  {/* Simulated Chart */}
-                  <div className="h-48 flex items-end justify-between gap-1 px-4">
-                    {[35, 28, 42, 55, 48, 62, 45, 38, 52, 68, 75, 58, 42, 55, 48, 62, 70, 85, 78, 65, 55, 48, 42, 38].map(
-                      (height, i) => (
-                        <div key={i} className="flex-1 flex flex-col items-center gap-1">
-                          <div
-                            className="w-full bg-primary/60 rounded-t transition-all hover:bg-primary"
-                            style={{ height: `${height}%` }}
-                          />
-                        </div>
-                      )
-                    )}
-                  </div>
-                  
-                  <div className="flex items-center justify-center gap-6 mt-4 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <div className="w-2 h-2 rounded-full bg-primary" />
-                      Load (kW)
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <div className="w-2 h-2 rounded-full bg-amber-500" />
-                      PV (kW)
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                      Price (p/kWh)
-                    </span>
+                  {/* Recharts Line Chart */}
+                  <div className="h-48">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <RechartsLineChart data={forecastData} margin={{ top: 5, right: 10, left: -10, bottom: 5 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.5} />
+                        <XAxis 
+                          dataKey="hour" 
+                          stroke="hsl(var(--muted-foreground))"
+                          fontSize={9}
+                          interval={3}
+                          tickLine={false}
+                          axisLine={false}
+                        />
+                        <YAxis 
+                          stroke="hsl(var(--muted-foreground))" 
+                          fontSize={9}
+                          tickLine={false}
+                          axisLine={false}
+                        />
+                        <Tooltip 
+                          contentStyle={{ 
+                            backgroundColor: 'hsl(var(--card))', 
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: '8px',
+                            color: 'hsl(var(--foreground))',
+                            fontSize: '12px'
+                          }}
+                          formatter={(value: number, name: string) => {
+                            if (name === 'Price (p/kWh)') {
+                              return [`${value}p`, name];
+                            }
+                            return [value, name];
+                          }}
+                        />
+                        <Legend 
+                          wrapperStyle={{ fontSize: '10px' }}
+                          iconSize={8}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="load" 
+                          stroke="hsl(var(--primary))" 
+                          strokeWidth={2}
+                          name="Load (kW)"
+                          dot={false}
+                          activeDot={{ r: 4, stroke: 'hsl(var(--primary))', strokeWidth: 2 }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="pv" 
+                          stroke="#10b981" 
+                          strokeWidth={2}
+                          name="PV (kW)"
+                          dot={false}
+                          activeDot={{ r: 4, stroke: '#10b981', strokeWidth: 2 }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="price" 
+                          stroke="#f59e0b" 
+                          strokeWidth={2}
+                          name="Price (p/kWh)"
+                          dot={false}
+                          activeDot={{ r: 4, stroke: '#f59e0b', strokeWidth: 2 }}
+                        />
+                      </RechartsLineChart>
+                    </ResponsiveContainer>
                   </div>
                 </div>
 
