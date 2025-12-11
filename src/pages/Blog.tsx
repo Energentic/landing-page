@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -82,6 +82,10 @@ const blogPosts = [
 
 const Blog = () => {
   const [selectedTag, setSelectedTag] = useState("All");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const filteredPosts =
     selectedTag === "All"
