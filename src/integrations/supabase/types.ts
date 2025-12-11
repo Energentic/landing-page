@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          is_read: boolean
+          last_name: string
+          message: string
+          organization: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          is_read?: boolean
+          last_name: string
+          message: string
+          organization: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          is_read?: boolean
+          last_name?: string
+          message?: string
+          organization?: string
+        }
+        Relationships: []
+      }
       waitlist: {
         Row: {
           company: string | null
