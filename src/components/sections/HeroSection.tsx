@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Zap, Play, BarChart3, Activity, Cpu, LineChart } from "lucide-react";
-import { Link } from "react-router-dom";
 import { WaitlistDialog } from "@/components/WaitlistDialog";
 import logo from "@/assets/logo.png";
 import { LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
@@ -67,11 +66,14 @@ export const HeroSection = () => {
                 Join Waitlist
               </Button>
             </WaitlistDialog>
-            <Button variant="hero-outline" size="xl" asChild>
-              <Link to="/#video" className="gap-2">
-                <Play className="w-5 h-5" />
-                Watch Demo Video
-              </Link>
+            <Button 
+              variant="hero-outline" 
+              size="xl" 
+              className="gap-2"
+              onClick={() => document.getElementById('video')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <Play className="w-5 h-5" />
+              Watch Demo Video
             </Button>
           </div>
         </div>
