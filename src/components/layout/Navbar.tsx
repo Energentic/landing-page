@@ -31,6 +31,9 @@ export const Navbar = () => {
       } else {
         document.getElementById(link.section)?.scrollIntoView({ behavior: "smooth" });
       }
+    } else if (link.href === "/blog" && location.pathname === "/blog") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
