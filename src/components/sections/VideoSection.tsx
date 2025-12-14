@@ -21,7 +21,7 @@ export const VideoSection = () => {
 
         {/* Video Player */}
         <div className="max-w-4xl mx-auto">
-          <div className="relative aspect-video rounded-2xl overflow-hidden shadow-prominent">
+          <div className="relative aspect-[16/10] rounded-2xl overflow-hidden shadow-prominent">
             <iframe
               src="https://demovideos-energentic.s3.eu-north-1.amazonaws.com/Demo_v1_optimised.mp4"
               title="Energentic AI Demo"
