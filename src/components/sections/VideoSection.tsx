@@ -20,8 +20,8 @@ export const VideoSection = () => {
         </div>
 
         {/* Video Player */}
-        <div className="relative max-w-4xl mx-auto">
-          <div className="relative aspect-[16/10] rounded-2xl overflow-hidden shadow-prominent">
+        <div className="max-w-4xl mx-auto">
+          <div className="relative aspect-video rounded-2xl overflow-hidden shadow-prominent">
             <iframe
               src="https://demovideos-energentic.s3.eu-north-1.amazonaws.com/Demo_v1_optimised.mp4"
               title="Energentic AI Demo"
@@ -30,23 +30,6 @@ export const VideoSection = () => {
               frameBorder="0"
               className="absolute inset-0 w-full h-full border-0"
             />
-          </div>
-
-          {/* Floating Stats */}
-          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4">
-            {[
-              { value: "40%", label: "Cost Reduction" },
-              { value: "3x", label: "Faster Deploy" },
-              { value: "99.9%", label: "Uptime" },
-            ].map((stat, i) => (
-              <div
-                key={i}
-                className="bg-card px-6 py-3 rounded-xl border border-border shadow-soft text-center"
-              >
-                <p className="text-xl font-bold text-primary">{stat.value}</p>
-                <p className="text-xs text-muted-foreground">{stat.label}</p>
-              </div>
-            ))}
           </div>
         </div>
       </div>
