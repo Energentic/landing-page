@@ -1,84 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, ArrowRight, Tag } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const tags = [
-  "All",
-  "AI & Machine Learning",
-  "Clean Energy",
-  "Case Studies",
-  "Product Updates",
-  "Industry Insights",
-  "Tutorials",
-];
-
-const blogPosts = [
-  {
-    id: 1,
-    title: "How Explainable AI is Revolutionizing Energy Management",
-    excerpt:
-      "Discover why transparency in AI decision-making is crucial for the energy sector and how Energentic's approach sets a new standard.",
-    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80",
-    date: "Dec 5, 2024",
-    readTime: "8 min read",
-    tags: ["AI & Machine Learning", "Clean Energy"],
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Optimizing Data Center Energy with AI Agents",
-    excerpt:
-      "A deep dive into how our AI agents helped a major data center reduce energy costs by 35% while maintaining 99.99% uptime.",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
-    date: "Nov 28, 2024",
-    readTime: "6 min read",
-    tags: ["Case Studies", "AI & Machine Learning"],
-  },
-  {
-    id: 3,
-    title: "Introducing ForecastAgent 2.0: Next-Gen Energy Prediction",
-    excerpt:
-      "Our latest update brings 40% improved accuracy and real-time adaptive learning to energy forecasting.",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
-    date: "Nov 15, 2024",
-    readTime: "4 min read",
-    tags: ["Product Updates"],
-  },
-  {
-    id: 4,
-    title: "The Future of Microgrids: Intelligence at the Edge",
-    excerpt:
-      "Exploring how decentralized energy systems are becoming smarter with AI-driven control and optimization.",
-    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80",
-    date: "Nov 8, 2024",
-    readTime: "10 min read",
-    tags: ["Industry Insights", "Clean Energy"],
-  },
-  {
-    id: 5,
-    title: "Getting Started with Energentic's API",
-    excerpt:
-      "A step-by-step guide to integrating our AI agents into your existing energy management systems.",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
-    date: "Oct 30, 2024",
-    readTime: "12 min read",
-    tags: ["Tutorials"],
-  },
-  {
-    id: 6,
-    title: "Why Modular AI Design Matters for Energy Systems",
-    excerpt:
-      "Understanding the benefits of plug-and-play AI components for diverse energy infrastructure applications.",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
-    date: "Oct 22, 2024",
-    readTime: "7 min read",
-    tags: ["AI & Machine Learning", "Industry Insights"],
-  },
-];
+import { blogPosts } from "@/data/blogPosts";
 
 const Blog = () => {
   const [selectedTag, setSelectedTag] = useState("All");
@@ -86,6 +13,11 @@ const Blog = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const tags = useMemo(
+    () => ["All", ...new Set(blogPosts.flatMap((post) => post.tags))],
+    []
+  );
 
   const filteredPosts =
     selectedTag === "All"
@@ -144,7 +76,7 @@ const Blog = () => {
           <section className="py-12 md:py-16">
             <div className="container mx-auto px-4 sm:px-6">
               <Link
-                to={`/blog/${featuredPost.id}`}
+                to={`/blog/${featuredPost.slug}`}
                 className="group grid lg:grid-cols-2 gap-8 bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/30 transition-all hover:shadow-elevated"
               >
                 <div className="aspect-video lg:aspect-auto overflow-hidden">
@@ -194,7 +126,7 @@ const Blog = () => {
               {regularPosts.map((post) => (
                 <Link
                   key={post.id}
-                  to={`/blog/${post.id}`}
+                  to={`/blog/${post.slug}`}
                   className="group bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/30 transition-all hover:shadow-elevated"
                 >
                   <div className="aspect-video overflow-hidden">
