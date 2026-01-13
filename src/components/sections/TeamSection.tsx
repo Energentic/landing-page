@@ -1,5 +1,4 @@
-import { Linkedin, ExternalLink } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Linkedin } from "lucide-react";
 import teamZekun from "@/assets/team-zekun.png";
 import teamJulius from "@/assets/team-julius.png";
 import teamSnehal from "@/assets/team-snehal.png";
@@ -7,13 +6,13 @@ import teamSnehal from "@/assets/team-snehal.png";
 const teamMembers = [
   {
     name: "Dr Zekun Guo",
-    role: "Founder and CEO",
+    role: "Lecturer in Electrical Engineering, UoH",
     image: teamZekun,
     linkedin: "https://www.linkedin.com/in/dr-zekun-guo/",
   },
   {
     name: "Dr Julius Mboli",
-    role: "CSO - Responsible AI Expert",
+    role: "Lecturer at DAIM, UoH",
     image: teamJulius,
     linkedin: "https://www.linkedin.com/in/engr-julius-sechang-mboli/",
   },
@@ -79,23 +78,6 @@ export const TeamSection = () => {
           ))}
         </div>
 
-        {/* Research Team Link */}
-        <div className="text-center">
-          <p className="text-muted-foreground mb-4">
-            Explore our full research team and academic contributions
-          </p>
-          <Button variant="outline" asChild>
-            <a
-              href="https://energentic.github.io"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2"
-            >
-              Visit Research Team Page
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          </Button>
-        </div>
       </div>
     </section>
   );
