@@ -2,13 +2,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
 import { Send, Mail, Building, User } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 
 export const ContactSection = () => {
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -17,43 +13,15 @@ export const ContactSection = () => {
     message: "",
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const { error } = await supabase.from("contact_messages").insert({
-        first_name: formData.firstName.trim(),
-        last_name: formData.lastName.trim(),
-        email: formData.email.trim(),
-        organization: formData.organization.trim(),
-        message: formData.message.trim(),
-      });
-
-      if (error) throw error;
-
-      toast({
-        title: "Message sent!",
-        description: "We'll get back to you within 24 hours.",
-      });
-
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        organization: "",
-        message: "",
-      });
-    } catch (error) {
-      console.error("Error submitting contact form:", error);
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    const subject = encodeURIComponent(
+      `Enquiry from ${formData.firstName.trim()} ${formData.lastName.trim()} - ${formData.organization.trim()}`
+    );
+    const body = encodeURIComponent(
+      `Name: ${formData.firstName.trim()} ${formData.lastName.trim()}\nEmail: ${formData.email.trim()}\nOrganisation: ${formData.organization.trim()}\n\n${formData.message.trim()}`
+    );
+    window.location.href = `mailto:z.guo2@hull.ac.uk?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -63,7 +31,7 @@ export const ContactSection = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <span className="section-label mb-4 block">
-              Book a Demo or Start the Conversation
+              Get in Touch
             </span>
             <h2 className="section-title mb-6">
               Let's Power Smarter Energy Together
@@ -179,16 +147,9 @@ export const ContactSection = () => {
               variant="hero"
               size="xl"
               className="w-full"
-              disabled={isSubmitting}
             >
-              {isSubmitting ? (
-                "Sending..."
-              ) : (
-                <>
-                  <Send className="w-5 h-5" />
-                  Send Message
-                </>
-              )}
+              <Send className="w-5 h-5" />
+              Send Message
             </Button>
           </form>
         </div>

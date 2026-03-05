@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Zap, Play, BarChart3, Activity, Cpu, LineChart } from "lucide-react";
-import { WaitlistDialog } from "@/components/WaitlistDialog";
+import { Mail, Play, BarChart3, Activity, Cpu, LineChart } from "lucide-react";
+import { scrollToElement } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 import { LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
@@ -60,17 +60,19 @@ export const HeroSection = () => {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-up animation-delay-300">
-            <WaitlistDialog>
-              <Button variant="hero" size="xl" className="gap-2">
-                <Zap className="w-5 h-5" />
-                Join Waitlist
-              </Button>
-            </WaitlistDialog>
+            <Button
+              variant="hero"
+              size="xl"
+              onClick={() => window.location.href = "mailto:z.guo2@hull.ac.uk"}
+            >
+              <Mail className="w-5 h-5" />
+              Get in Touch
+            </Button>
             <Button 
               variant="hero-outline" 
               size="xl" 
               className="gap-2"
-              onClick={() => document.getElementById('video')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => scrollToElement('video')}
             >
               <Play className="w-5 h-5" />
               Watch Demo Video

@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Menu, X, Mail } from "lucide-react";
+import { cn, scrollToElement, scrollToTop } from "@/lib/utils";
 import logo from "@/assets/logo.png";
-import { WaitlistDialog } from "@/components/WaitlistDialog";
 
 const navLinks = [
   { name: "Home", href: "/", section: null },
@@ -25,15 +24,19 @@ export const Navbar = () => {
       e.preventDefault();
       if (location.pathname !== "/") {
         navigate("/");
-        setTimeout(() => {
-          document.getElementById(link.section!)?.scrollIntoView({ behavior: "smooth" });
-        }, 100);
+        setTimeout(() => scrollToElement(link.section!), 150);
       } else {
-        document.getElementById(link.section)?.scrollIntoView({ behavior: "smooth" });
+        scrollToElement(link.section);
       }
+    } else if (link.href === "/") {
+      e.preventDefault();
+      if (location.pathname !== "/") {
+        navigate("/");
+      }
+      scrollToTop();
     } else if (link.href === "/blog" && location.pathname === "/blog") {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      scrollToTop();
     }
   };
 
@@ -70,11 +73,14 @@ export const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <WaitlistDialog>
-              <Button variant="hero" size="lg">
-                Join Waitlist
-              </Button>
-            </WaitlistDialog>
+            <Button
+              variant="hero"
+              size="lg"
+              onClick={() => window.location.href = "mailto:z.guo2@hull.ac.uk"}
+            >
+              <Mail className="w-4 h-4" />
+              Get in Touch
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -109,11 +115,15 @@ export const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-              <WaitlistDialog>
-                <Button variant="hero" size="lg" className="mt-2">
-                  Join Waitlist
-                </Button>
-              </WaitlistDialog>
+              <Button
+                variant="hero"
+                size="lg"
+                className="mt-2"
+                onClick={() => window.location.href = "mailto:z.guo2@hull.ac.uk"}
+              >
+                <Mail className="w-4 h-4" />
+                Get in Touch
+              </Button>
             </div>
           </div>
         )}
