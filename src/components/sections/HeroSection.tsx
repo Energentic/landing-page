@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ClipboardList, Play, BarChart3, Activity, Cpu, LineChart } from "lucide-react";
+import { Mail, Play, BarChart3, Activity, Cpu, LineChart } from "lucide-react";
 import { scrollToElement } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 import { LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
@@ -63,10 +63,10 @@ export const HeroSection = () => {
             <Button
               variant="hero"
               size="xl"
-              onClick={() => scrollToElement("contact")}
+              onClick={() => window.location.href = "mailto:z.guo2@hull.ac.uk"}
             >
-              <ClipboardList className="w-5 h-5" />
-              Join Waitlist
+              <Mail className="w-5 h-5" />
+              Get in Touch
             </Button>
             <Button 
               variant="hero-outline" 

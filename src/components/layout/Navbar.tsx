@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ClipboardList, Menu, X } from "lucide-react";
+import { Menu, X, Mail } from "lucide-react";
 import { cn, scrollToElement, scrollToTop } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 
@@ -11,7 +11,7 @@ const navLinks = [
   { name: "Features", href: "/#features", section: "features" },
   { name: "Team", href: "/#team", section: "team" },
   { name: "Blog", href: "/blog", section: null },
-  { name: "Waitlist", href: "/#contact", section: "contact" },
+  { name: "Contact", href: "/#contact", section: "contact" },
 ];
 
 export const Navbar = () => {
@@ -38,16 +38,6 @@ export const Navbar = () => {
       e.preventDefault();
       scrollToTop();
     }
-  };
-
-  const handleWaitlistClick = () => {
-    if (location.pathname !== "/") {
-      navigate("/");
-      setTimeout(() => scrollToElement("contact"), 150);
-    } else {
-      scrollToElement("contact");
-    }
-    setIsOpen(false);
   };
 
   return (
@@ -86,10 +76,10 @@ export const Navbar = () => {
             <Button
               variant="hero"
               size="lg"
-              onClick={handleWaitlistClick}
+              onClick={() => window.location.href = "mailto:z.guo2@hull.ac.uk"}
             >
-              <ClipboardList className="w-4 h-4" />
-              Join Waitlist
+              <Mail className="w-4 h-4" />
+              Get in Touch
             </Button>
           </div>
 
@@ -129,10 +119,10 @@ export const Navbar = () => {
                 variant="hero"
                 size="lg"
                 className="mt-2"
-                onClick={handleWaitlistClick}
+                onClick={() => window.location.href = "mailto:z.guo2@hull.ac.uk"}
               >
-                <ClipboardList className="w-4 h-4" />
-                Join Waitlist
+                <Mail className="w-4 h-4" />
+                Get in Touch
               </Button>
             </div>
           </div>
