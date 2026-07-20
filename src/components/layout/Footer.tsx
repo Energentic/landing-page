@@ -8,7 +8,7 @@ const footerLinks = [
   { name: "Features", href: "/#features", section: "features" },
   { name: "Team", href: "/#team", section: "team" },
   { name: "Blog", href: "/blog", section: null },
-  { name: "Contact", href: "/#contact", section: "contact" },
+  { name: "Waitlist", href: "/#contact", section: "contact" },
 ];
 
 export const Footer = () => {
